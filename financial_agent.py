@@ -5,6 +5,7 @@ from phi.tools.duckduckgo import DuckDuckGo
 from dotenv import load_dotenv
 import os
 import phi
+load_dotenv(dotenv_path='../.env')
 print("GROQ_API_KEY:", os.getenv("GROQ_API_KEY"))
 # Load environment variables (including your GROQ_API_KEY)
 load_dotenv()
@@ -14,7 +15,7 @@ phi.api.groq_api_key = os.getenv("GROQ_API_KEY")
 web_search_agent = Agent(
     name="Web Search Agent",
     role='Search the web for information',
-    model=Groq(id="llama3-groq-70b-8192-tool-use-preview"),
+    model=Groq(id="gemma2-9b-it"),
     tools=[DuckDuckGo()],
     instructions=["Always include sources"],
     show_tools_calls=True,
@@ -24,7 +25,7 @@ web_search_agent = Agent(
 # Financial agent
 finance_agent = Agent(
     name="Finance AI Agent",
-    model=Groq(id="llama3-groq-70b-8192-tool-use-preview"),
+    model=Groq(id="gemma2-9b-it"),
     role="You are a financial expert who can provide information on stocks, bonds, and mutual funds",
     tools=[YFinanceTools(
         stock_price=True,
@@ -39,7 +40,7 @@ finance_agent = Agent(
 
 # Multi-agent team
 multi_ai_agent = Agent(
-    model=Groq(id="llama3-groq-70b-8192-tool-use-preview"),
+    model=Groq(id="gemma2-9b-it"),
     team=[
         web_search_agent,
         finance_agent
