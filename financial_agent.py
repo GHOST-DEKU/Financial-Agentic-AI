@@ -15,7 +15,7 @@ phi.api.groq_api_key = os.getenv("GROQ_API_KEY")
 web_search_agent = Agent(
     name="Web Search Agent",
     role='Search the web for information',
-    model=Groq(id="gemma2-9b-it"),
+    model=Groq(id="meta-llama/llama-4-maverick-17b-128e-instruct"),
     tools=[DuckDuckGo()],
     instructions=["Always include sources"],
     show_tools_calls=True,
@@ -25,7 +25,7 @@ web_search_agent = Agent(
 # Financial agent
 finance_agent = Agent(
     name="Finance AI Agent",
-    model=Groq(id="gemma2-9b-it"),
+    model=Groq(id="meta-llama/llama-4-maverick-17b-128e-instruct"),
     role="You are a financial expert who can provide information on stocks, bonds, and mutual funds",
     tools=[YFinanceTools(
         stock_price=True,
@@ -40,7 +40,7 @@ finance_agent = Agent(
 
 # Multi-agent team
 multi_ai_agent = Agent(
-    model=Groq(id="gemma2-9b-it"),
+    model=Groq(id="meta-llama/llama-4-maverick-17b-128e-instruct"),
     team=[
         web_search_agent,
         finance_agent
